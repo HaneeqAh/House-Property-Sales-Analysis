@@ -1,75 +1,181 @@
-House-Property-Sales-Analysis
+# House Property Sales Analysis
 
-The retail industry now heavily relies on data analytics tools to better estimate the prices of different properties. This case study analyses the sales of house properties in a city in Australia using SQL.
+## Overview
+The retail and real estate industries increasingly rely on data analytics tools to estimate property values and understand market behavior. This project focuses on analyzing house property sales in a city in Australia using SQL to uncover insights related to pricing, market trends, geographic variations, and sales performance.
 
-The Dataset
-The dataset contains five columns:
+The analysis aims to identify the factors that influence property prices and evaluate the overall health of the real estate market.
 
-Datesold: The date when an owner sold the house to a buyer.
+---
 
-Postcode: 4-digit postcode of the suburb where the owner sold the property
+# Dataset Description
 
-PropetyType: The type of property either a house or unit.
+The dataset contains information related to property sales and includes the following columns:
 
-Price: The price for which the owner sold the property.
+| Column Name | Description |
+|-------------|-------------|
+| `DateSold` | The date when the property was sold |
+| `Postcode` | 4-digit postcode of the suburb where the property was sold |
+| `PropertyType` | Type of property (`House` or `Unit`) |
+| `Price` | Sale price of the property |
+| `Bedrooms` | Number of bedrooms in the property |
 
-Bedrooms: Number of bedrooms
+---
 
+# Problem Statement
 
-Problem Statement
-This data analytics project aims to analyze and derive insights from the property sales dataset to understand the factors influencing property prices and explore trends in the real estate market.
+This data analytics project aims to analyze and derive insights from the property sales dataset to better understand the factors influencing property prices and explore trends in the real estate market.
 
-Objectives
-Price Determinants
+---
 
-Identify factors influencing property prices, such as location, property type, and the number of bedrooms.
+# Objectives
 
-Market Trends
+## 1. Price Determinants
+Identify the major factors influencing property prices, including:
 
+- Location
+- Property type
+- Number of bedrooms
+
+## 2. Market Trends
 Analyze trends in property sales over time to understand how the market has evolved.
 
-Geographic Variation
+## 3. Geographic Variation
+Explore variations in property prices across different postcodes and neighborhoods.
 
-Explore geographic variation in property prices by analyzing data across different postcodes.
+## 4. Bedroom Analysis
+Investigate the impact of the number of bedrooms on property prices and buyer demand.
 
-Bedroom Analysis
+## 5. Market Performance
+Evaluate the overall performance and condition of the real estate market based on sales data.
 
-Investigate how the number of bedrooms affects property prices and demand.
+---
 
-Market Performance
+# Key Questions
 
-Evaluate the overall performance of the real estate market based on property sales data.
+The analysis seeks to answer the following business questions:
 
-Key Questions
-What are the main factors contributing to variations in property prices for houses in the dataset?
+1. What are the main factors contributing to variations in property prices?
+2. Does the number of bedrooms significantly affect property prices?
+3. How has the average property price changed over time?
+4. Are there seasonal patterns or long-term trends in the market?
+5. Is there a correlation between property prices and property type?
+6. Are there significant differences in prices across postcodes?
+7. Which are the top six postcodes by yearly property price?
+8. Which neighborhoods or postcodes show consistent growth in property prices?
+9. Which date recorded the highest number of sales?
+10. Which year witnessed the lowest number of sales?
+11. Which postcode has the highest average price per sale?
+12. Are there noticeable patterns in the dates of property sales?
+13. What does the sales data reveal about the health of the real estate market?
+14. Can potential investment opportunities be identified from the analysis?
 
-Does the number of bedrooms have a noticeable impact on property prices, and if so, what is the relationship?
+---
 
-How has the average property price changed over time? Are there any seasonal patterns or long-term trends?
+# Assumptions
 
-Is there any correlation between property prices and property type?
+The following assumptions were considered during the analysis:
 
-Are there significant differences in property prices between different postcodes?
+- Currency values remained stable throughout the analysis period.
+- Market conditions were relatively stable without major economic disruptions.
+- The market is assumed to be homogeneous within each postcode area.
+- All significant variables affecting property prices are included in the dataset.
+- External factors such as market sentiment and economic changes are not considered.
+- Changes in property prices are accurately reflected in the dataset without delay.
 
-Deduce the top six postcodes by year's price.
+---
 
-Are there specific neighborhoods or postcodes that have shown consistent growth in property prices?
+# Tools & Technologies
 
-Which date corresponds to the highest number of sales?
+The following tools and techniques were used in this project:
 
-Which year witnessed the lowest number of sales?
+- SQL
+- Data Cleaning
+- Data Aggregation
+- Filtering & Grouping
+- Window Functions
+- Trend Analysis
+- Descriptive Analytics
 
-Find out the postcode with the highest average price per sale.
+---
 
-Are there any patterns or trends in the dates of property sales?
+# Expected Outcomes
 
-What is the overall health of the real estate market based on the sales data?
+This analysis is expected to provide insights into:
 
-Can we identify any potential investment opportunities or areas where property prices have the potential to increase significantly?
+- Property pricing behavior
+- High-performing postcodes
+- Market growth trends
+- Buyer demand patterns
+- Seasonal sales activity
+- Potential investment hotspots
 
-Assumptions
-Currency remained stable over time. Currency fluctuations impact price changes.
-Market homogeneity; implying the market is relatively homogenous within the defined geographical areas ( postcodes).
-Market conditions were stable over the analysis period. Market fluctuations can happen due to economic or political factors.
-All relevant factors influencing property prices are included in the dataset i.e. external factors can influence price e.g. market sentiment but for this case study, only the variables listed in the dataset affect price.
-Changes in Property prices are reflected in the data promptly.
+---
+
+# Project Structure
+
+```bash
+House-Property-Sales-Analysis/
+│
+├── Dataset/
+│   └── raw_sales.csv
+│
+├── SQL Queries/
+│   ├── data_cleaning.sql
+│   ├── exploratory_analysis.sql
+│   └── business_questions.sql
+│
+├── README.md
+│
+└── Results/
+    └── insights_summary.sql
+```
+
+---
+
+# Sample SQL Analysis
+
+## Average Property Price by Property Type
+
+```sql
+SELECT 
+    PropertyType,
+    ROUND(AVG(Price), 2) AS AveragePrice
+FROM house_sales
+GROUP BY PropertyType;
+```
+
+## Top 6 Postcodes by Average Price
+
+```sql
+SELECT 
+    Postcode,
+    ROUND(AVG(Price), 2) AS AveragePrice
+FROM house_sales
+GROUP BY Postcode
+ORDER BY AveragePrice DESC
+LIMIT 6;
+```
+
+## Year with Lowest Number of Sales
+
+```sql
+SELECT 
+    EXTRACT(YEAR FROM DateSold) AS Year,
+    COUNT(*) AS TotalSales
+FROM house_sales
+GROUP BY Year
+ORDER BY TotalSales ASC
+LIMIT 1;
+```
+
+---
+
+# Conclusion
+
+This project provides a comprehensive analysis of property sales data to better understand the Australian real estate market. By analyzing pricing patterns, location-based trends, and sales activity, the project supports data-driven decision-making for investors, analysts, and real estate professionals.
+
+---
+
+# Author
+
+**Haneeq**
